@@ -5,7 +5,7 @@ require 'kubec/version'
 Gem::Specification.new do |spec|
   spec.name          = 'kubec'
   spec.version       = Kubec::VERSION
-  spec.authors       = %w[五倍紅寶石 蒼時弦也]
+  spec.authors       = %w[5xRuby Aotokitsuruya]
   spec.email         = %w[rubygems@5xruby.tw contact@frost.tw]
 
   spec.summary       = 'Kubec is a utility for generate kubernetes config ' \
@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.5'
+  spec.add_development_dependency 'rubocop', '~> 0.49.0'
 end
