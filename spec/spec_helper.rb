@@ -1,4 +1,8 @@
 require 'bundler/setup'
+
+require 'simplecov'
+SimpleCov.start
+
 require 'kubec'
 
 RSpec.configure do |config|
