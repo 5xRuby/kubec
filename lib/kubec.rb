@@ -1,6 +1,9 @@
+require 'rake'
+
 require 'kubec/version'
 
 # Kuberentes Config Tool
 module Kubec
-  # Your code goes here...
+  autoload :Application, 'kubec/application'
+  autoload :DSL, 'kubec/dsl'
 end
