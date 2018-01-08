@@ -22,6 +22,27 @@ module Kubec
       super
     end
 
+    def top_level_tasks
+      has_config = DEFAULT_KUBECFILES.map { |f| File.exist?(f) }.reduce(:|)
+      return @top_level_tasks if has_config
+      return @top_level_tasks if default_tasks.include?(@top_level_tasks.first)
+
+      @top_level_tasks.unshift(warning_not_init.to_s)
+    end
+
+    private
+
+    def warning_not_init
+      Rake::Task.define_task(:warning_not_init) do
+        puts 'Kubeconfig isn\'t init'
+        exit 1
+      end
+    end
+
+    def default_tasks
+      %w[init]
+    end
+
     def handle_options
       options.rakelib = ['rakelib']
       options.trace_output = STDERR
