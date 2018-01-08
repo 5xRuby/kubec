@@ -8,6 +8,10 @@ module Kubec
       'kubeconfig.rb'
     ].freeze
 
+    def self.config_exist?
+      DEFAULT_KUBECFILES.map { |f| File.exist?(f) }.reduce(:|)
+    end
+
     def initialize
       super
       @rakefiles = DEFAULT_KUBECFILES.dup << default_kubeconfig
@@ -23,8 +27,7 @@ module Kubec
     end
 
     def top_level_tasks
-      has_config = DEFAULT_KUBECFILES.map { |f| File.exist?(f) }.reduce(:|)
-      return @top_level_tasks if has_config
+      return @top_level_tasks if self.class.config_exist?
       return @top_level_tasks if default_tasks.include?(@top_level_tasks.first)
 
       @top_level_tasks.unshift(warning_not_init.to_s)
