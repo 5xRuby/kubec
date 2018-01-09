@@ -30,20 +30,20 @@ module Kubec
       return @top_level_tasks if self.class.config_exist?
       return @top_level_tasks if default_tasks.include?(@top_level_tasks.first)
 
-      @top_level_tasks.unshift(warning_not_init.to_s)
+      @top_level_tasks.unshift(ensure_environment.to_s)
     end
 
     private
 
-    def warning_not_init
-      Rake::Task.define_task(:warning_not_init) do
+    def ensure_environment
+      Rake::Task.define_task(:ensure_environment) do
         puts 'Kubeconfig isn\'t init'
         exit 1
       end
     end
 
     def default_tasks
-      %w[init]
+      %w[install]
     end
 
     def handle_options

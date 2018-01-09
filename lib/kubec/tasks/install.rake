@@ -1,4 +1,4 @@
-task :init do
+task :install do
   template_path = File.expand_path('../../templates', __FILE__)
 
   if Kubec::Application.config_exist?
