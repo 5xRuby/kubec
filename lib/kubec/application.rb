@@ -27,8 +27,9 @@ module Kubec
     end
 
     def top_level_tasks
-      return @top_level_tasks if self.class.config_exist?
-      return @top_level_tasks if default_tasks.include?(@top_level_tasks.first)
+      # rubocop:disable Metrics/LineLength
+      return @top_level_tasks if tasks_without_stage_dependency.include?(@top_level_tasks.first)
+      # rubocop:enable Metrics/LineLength
 
       @top_level_tasks.unshift(ensure_environment.to_s)
     end
@@ -37,9 +38,13 @@ module Kubec
 
     def ensure_environment
       Rake::Task.define_task(:ensure_environment) do
-        puts 'Kubeconfig isn\'t init'
+        puts 'Kubeconfig isn\'t install or stage not configured'
         exit 1
       end
+    end
+
+    def tasks_without_stage_dependency
+      stages + default_tasks
     end
 
     def default_tasks
