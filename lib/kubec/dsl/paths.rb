@@ -13,6 +13,4 @@ module Kubec
   end
 end
 
-# rubocop:disable Style/MixinUsage
 extend Kubec::DSL
-# rubocop:enable Style/MixinUsage
