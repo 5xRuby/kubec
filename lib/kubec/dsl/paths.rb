@@ -5,6 +5,10 @@ module Kubec
       def stage_config_path
         Pathname.new 'config/kubec'
       end
+
+      def stack_config_path
+        Pathname.new 'config/kubec.rb'
+      end
     end
   end
 end

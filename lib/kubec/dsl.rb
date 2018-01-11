@@ -1,6 +1,7 @@
 require 'kubec/dsl/stages'
 require 'kubec/dsl/paths'
 require 'kubec/dsl/env'
+require 'kubec/dsl/kubernetes'
 
 module Kubec
   # DSL
@@ -8,5 +9,6 @@ module Kubec
     include Env
     include Paths
     include Stages
+    include Kubernetes
   end
 end

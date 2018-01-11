@@ -1,0 +1,35 @@
+module Kubec
+  class Kubernetes
+    # :nodoc:
+    class Template < Hash
+      attr_reader :name
+
+      class << self
+        def api_version(version = nil)
+          return @api_version if version.nil?
+          @api_version = version
+        end
+
+        def kind
+          name.split('::').last
+        end
+      end
+
+      def initialize(name, &block)
+        @name = name.to_sym
+        prepare
+        instance_exec(self, &block)
+      end
+
+      def metadata(&block)
+        self[:metadata].instance_eval(&block)
+      end
+
+      def prepare
+        self[:apiVersion] = self.class.api_version
+        self[:kind] = self.class.kind
+        self[:metadata] = Metadata.new(@name)
+      end
+    end
+  end
+end
