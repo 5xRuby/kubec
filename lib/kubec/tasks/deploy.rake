@@ -1,4 +1,8 @@
 namespace :deploy do
+  task :namespace do
+    Kubec::Kubernetes.ensure_namespace
+  end
+
   # TODO: Add support for real kubectl
   desc 'Apply Deployment to Kubernetes'
   task :deployments do
@@ -14,4 +18,8 @@ namespace :deploy do
 end
 
 desc 'Deploy to Kubernetes'
-task deploy: ['deploy:deployments', 'deploy:services']
+task deploy: [
+  'deploy:namespace',
+  'deploy:deployments',
+  'deploy:services'
+]

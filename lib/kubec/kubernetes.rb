@@ -35,6 +35,15 @@ module Kubec
         puts JSON.pretty_generate(instance.send(type))
       end
 
+      def ensure_namespace
+        return if Rake.application.options.debug
+        stage = fetch(:stage, :staging)
+
+        # TODO: Replace with RESTful API
+        `kubectl get ns #{stage} 2>&1`
+        `kubectl create ns #{stage}` unless $CHILD_STATUS.success?
+      end
+
       def convert_to_json(items)
         {
           apiVersion: 'v1',

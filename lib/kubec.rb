@@ -3,6 +3,7 @@ require 'json'
 require 'forwardable'
 require 'pathname'
 require 'singleton'
+require 'English'
 
 require 'kubec/version'
 
