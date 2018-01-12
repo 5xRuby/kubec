@@ -1,19 +1,19 @@
 namespace :status do
   desc 'Show service status'
   task :service do
-    puts 'Service Status'
+    Kubec::Utils::Helper.header 'Service Status'
     Kubec::Status::Service.print
   end
 
   desc 'Show deployment status'
   task :deployment do
-    puts 'Deployment Status'
+    Kubec::Utils::Helper.header 'Deployment Status'
     Kubec::Status::Deployment.print
   end
 
   desc 'Show pod status'
   task :pod do
-    puts 'Pod Status'
+    Kubec::Utils::Helper.header 'Pod Status'
     Kubec::Status::Pod.print
   end
 end

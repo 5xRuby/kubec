@@ -4,6 +4,7 @@ require 'forwardable'
 require 'pathname'
 require 'singleton'
 require 'hirb'
+require 'colorize'
 require 'English'
 
 require 'kubec/version'
