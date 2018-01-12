@@ -30,7 +30,8 @@ module Kubec
 
         def setup_ports
           self['Ports'] = spec['ports'].map do |port|
-            "#{port['port']}:#{port['targetPort']}/#{port['protocol']}"
+            target = port['nodePort'] || port['targetPort']
+            "#{port['port']}:#{target}/#{port['protocol']}"
           end.join(', ')
         end
 
