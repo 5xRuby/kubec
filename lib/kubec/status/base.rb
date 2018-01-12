@@ -1,10 +1,10 @@
 module Kubec
   # :nodoc:
   module Status
-    autoload :Printer, 'kubec/status/printer'
-    autoload :Service, 'kubec/status/service'
+    autoload :Printer,    'kubec/status/printer'
+    autoload :Service,    'kubec/status/service'
     autoload :Deployment, 'kubec/status/deployment'
-    autoload :Pod, 'kubec/status/pod'
+    autoload :Pod,        'kubec/status/pod'
 
     # :nodoc:
     class Base
@@ -37,15 +37,11 @@ module Kubec
       def each(&_block)
         return unless @success
         @items.each do |item|
-          yield process(item)
+          yield self.class.const_get('Item').new(item)
         end
       end
 
       private
-
-      def process(_item)
-        raise NotImplementedError, 'Process method should be implemented'
-      end
 
       def prepare
         return unless @success

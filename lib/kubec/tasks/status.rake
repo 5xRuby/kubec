@@ -7,10 +7,14 @@ namespace :status do
 
   desc 'Show deployment status'
   task :deployment do
+    puts 'Deployment Status'
+    Kubec::Status::Deployment.print
   end
 
   desc 'Show pod status'
   task :pod do
+    puts 'Pod Status'
+    Kubec::Status::Pod.print
   end
 end
 

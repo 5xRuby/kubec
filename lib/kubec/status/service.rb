@@ -4,10 +4,6 @@ module Kubec
     class Service < Base
       fields ['Name', 'Cluster IP', 'Ports', 'Selector']
 
-      def process(item)
-        Item.new(item)
-      end
-
       # :nodoc:
       class Item < Hash
         FIELDS = %i[name cluster_ip ports selector].freeze
