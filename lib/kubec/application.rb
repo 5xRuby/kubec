@@ -52,8 +52,7 @@ module Kubec
     end
 
     def handle_options
-      options.rakelib = ['rakelib']
-      options.trace_output = STDERR
+      setup_options
 
       OptionParser.new do |opts|
         opts.on_tail('-h', '--help', '-H', 'Display this help message.') do
@@ -73,11 +72,27 @@ module Kubec
         switch =~ /--#{Regexp.union(supported_options)}/
       end
 
-      super.push(version)
+      super.push(debug, version)
+    end
+
+    def setup_options
+      options.rakelib = ['rakelib']
+      options.debug = false
+      options.trace_output = STDERR
     end
 
     def default_kubeconfig
       File.expand_path('../../Kubeconfig', __FILE__)
+    end
+
+    def debug
+      [
+        '--[no-]debug', '-D',
+        'Display debug information',
+        lambda do |value|
+          options.debug = value
+        end
+      ]
     end
 
     def version

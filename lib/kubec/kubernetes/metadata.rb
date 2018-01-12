@@ -7,7 +7,14 @@ module Kubec
         self[:namespace] = fetch(:stage, :staging)
       end
 
-      def labels=(labels)
+      def label(key, value)
+        self['labels'] ||= {}
+        self['labels'][key] = value
+      end
+
+      def labels=(labels = nil)
+        self['labels'] ||= {}
+        return self['labels'] if labels.nil?
         # TODO: Check labels is valid
         self['labels'] = labels
       end

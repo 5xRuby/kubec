@@ -2,7 +2,11 @@ module Kubec
   class Kubernetes
     # :nodoc:
     class Config < Hash
+      extend Forwardable
+
       attr_reader :name
+
+      def_delegators :metadata, :labels, :label
 
       class << self
         def api_version(version = nil)
@@ -26,6 +30,7 @@ module Kubec
       end
 
       def metadata(&block)
+        return self[:metadata] unless block_given?
         self[:metadata].instance_eval(&block)
       end
 
