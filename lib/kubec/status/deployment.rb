@@ -42,7 +42,11 @@ module Kubec
         end
 
         def setup_age
-          # TODO: Human readable time
+          created_at = DateTime.parse(metadata['creationTimestamp']).to_time
+          secs = (Time.now - created_at).ceil
+          self['Age'] =
+            Utils::HumanizeTime
+            .humanize(secs, short: true, join: false).first
         end
       end
     end

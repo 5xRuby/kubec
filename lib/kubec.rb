@@ -12,7 +12,8 @@ require 'kubec/version'
 module Kubec
   autoload :Application, 'kubec/application'
   autoload :Environment, 'kubec/environment'
-  autoload :Kubernetes, 'kubec/kubernetes'
-  autoload :DSL, 'kubec/dsl'
-  autoload :Status, 'kubec/status/base'
+  autoload :Kubernetes,  'kubec/kubernetes'
+  autoload :DSL,         'kubec/dsl'
+  autoload :Status,      'kubec/status/base'
+  autoload :Utils,       'kubec/utils'
 end
