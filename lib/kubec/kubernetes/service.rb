@@ -10,10 +10,17 @@ module Kubec
         spec[:ports].push port: port, targetPort: target
       end
 
-      def selector(labels)
+      def select(key, value)
+        spec[:selector] ||= {}
+        spec[:selector][key] = value
+      end
+
+      def selector=(labels)
         # TODO: Check labels type
         spec[:selector] = labels
       end
+
+      alias selector selector=
     end
   end
 end
