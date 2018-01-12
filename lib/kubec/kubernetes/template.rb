@@ -20,10 +20,9 @@ module Kubec
         self[:spec]
       end
 
-      def container(options = {})
-        # TODO: Generate by container builder
+      def container(name, &block)
         spec[:containers] ||= []
-        spec[:containers].push options
+        spec[:containers].push Container.new(name, &block)
       end
     end
   end

@@ -3,12 +3,15 @@
 module Kubec
   # Kubernetes
   class Kubernetes
-    autoload :Config, 'kubec/kubernetes/config'
-    autoload :Template, 'kubec/kubernetes/template'
-    autoload :Service, 'kubec/kubernetes/service'
-    autoload :Deployment, 'kubec/kubernetes/deployment'
-    autoload :Metadata, 'kubec/kubernetes/metadata'
-    autoload :Spec, 'kubec/kubernetes/spec'
+    autoload :Config,       'kubec/kubernetes/config'
+    autoload :Template,     'kubec/kubernetes/template'
+    autoload :Service,      'kubec/kubernetes/service'
+    autoload :Deployment,   'kubec/kubernetes/deployment'
+    autoload :Metadata,     'kubec/kubernetes/metadata'
+    autoload :Spec,         'kubec/kubernetes/spec'
+    autoload :Container,    'kubec/kubernetes/container'
+
+    autoload :HasAttribute, 'kubec/kubernetes/has_attribute'
 
     include Singleton
 
