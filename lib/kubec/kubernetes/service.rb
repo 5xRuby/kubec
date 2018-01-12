@@ -4,6 +4,11 @@ module Kubec
     class Service < Config
       api_version 'v1'
 
+      def load_balancer(ip: nil)
+        spec[:type] = 'LoadBalancer'
+        spec[:loadBalancerIP] = ip unless ip.nil?
+      end
+
       def port(port, target = nil)
         spec[:ports] ||= []
         target ||= port
