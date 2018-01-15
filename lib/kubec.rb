@@ -17,4 +17,5 @@ module Kubec
   autoload :DSL,         'kubec/dsl'
   autoload :Status,      'kubec/status/base'
   autoload :Utils,       'kubec/utils'
+  autoload :Config,      'kubec/config/base'
 end

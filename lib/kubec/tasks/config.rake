@@ -7,6 +7,7 @@ namespace :config do
 
   desc 'Download config files from ConfigMap'
   task pull: ['deploy:namespace'] do
-    warn '[SKIP] Unsupport now'
+    Kubec::Utils::Helper.header 'Starting save config maps'
+    Kubec::Config::Downloader.new.save
   end
 end
