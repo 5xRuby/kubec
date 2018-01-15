@@ -3,7 +3,6 @@ module Kubec
     # :nodoc:
     class Container < Hash
       include HasAttribute
-
       attribute :image
       attribute :name
       attribute :ports
@@ -39,6 +38,11 @@ module Kubec
           protocol: protocol
         }.compact
         self[:ports].push port
+      end
+
+      def command(*args)
+        self[:command] = [args.flatten.first]
+        self[:args] = args.flatten.drop(1)
       end
     end
   end
