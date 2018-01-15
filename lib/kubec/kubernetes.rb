@@ -3,20 +3,21 @@
 module Kubec
   # Kubernetes
   class Kubernetes
-    autoload :Config,     'kubec/kubernetes/config'
-    autoload :Template,   'kubec/kubernetes/template'
-    autoload :Service,    'kubec/kubernetes/service'
-    autoload :Deployment, 'kubec/kubernetes/deployment'
-    autoload :Metadata,   'kubec/kubernetes/metadata'
-    autoload :Spec,       'kubec/kubernetes/spec'
-    autoload :Container,  'kubec/kubernetes/container'
-    autoload :Volume,     'kubec/kubernetes/volume'
+    autoload :Config,       'kubec/kubernetes/config'
+    autoload :ConfigMap,    'kubec/kubernetes/config_map'
+    autoload :Template,     'kubec/kubernetes/template'
+    autoload :Service,      'kubec/kubernetes/service'
+    autoload :Deployment,   'kubec/kubernetes/deployment'
+    autoload :Metadata,     'kubec/kubernetes/metadata'
+    autoload :Spec,         'kubec/kubernetes/spec'
+    autoload :Container,    'kubec/kubernetes/container'
+    autoload :Volume,       'kubec/kubernetes/volume'
 
     autoload :HasAttribute, 'kubec/kubernetes/has_attribute'
 
     include Singleton
 
-    APPLYABLE_TYPES = %i[service deployment].freeze
+    APPLYABLE_TYPES = %i[service deployment config].freeze
 
     class << self
       def apply(type)
@@ -57,6 +58,7 @@ module Kubec
     def initialize
       @services = []
       @deployments = []
+      @configs = []
     end
 
     def service(name = nil, &block)
@@ -67,6 +69,11 @@ module Kubec
     def deployment(name = nil, &block)
       return @deployments if name.nil?
       @deployments << Kubernetes::Deployment.new(name, &block)
+    end
+
+    def config(name = nil, &block)
+      return @configs if name.nil?
+      @configs << Kubernetes::ConfigMap.new(name, &block)
     end
   end
 end
