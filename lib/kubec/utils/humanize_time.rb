@@ -10,7 +10,7 @@ module Kubec
       ].freeze
 
       SHORT = {
-        seocnds: 's',
+        seconds: 's',
         minutes: 'm',
         hours:   'h',
         days:    'd'
