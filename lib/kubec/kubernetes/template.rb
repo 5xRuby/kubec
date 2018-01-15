@@ -11,6 +11,11 @@ module Kubec
         self[:spec] = {}
       end
 
+      def volume(name, &block)
+        spec[:volumes] ||= []
+        spec[:volumes].push Volume.new(name, &block)
+      end
+
       def metadata(&block)
         return self[:metadata] unless block_given?
         self[:metadata].instance_eval(&block)
