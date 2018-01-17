@@ -1,23 +1,22 @@
-# frozen_string_literal: true
-
 module Kubec
   # Kubernetes
   class Kubernetes
-    autoload :Config,       'kubec/kubernetes/config'
-    autoload :ConfigMap,    'kubec/kubernetes/config_map'
-    autoload :Template,     'kubec/kubernetes/template'
-    autoload :Service,      'kubec/kubernetes/service'
-    autoload :Deployment,   'kubec/kubernetes/deployment'
-    autoload :Metadata,     'kubec/kubernetes/metadata'
-    autoload :Spec,         'kubec/kubernetes/spec'
-    autoload :Container,    'kubec/kubernetes/container'
-    autoload :Volume,       'kubec/kubernetes/volume'
+    autoload :Config,     'kubec/kubernetes/config'
+    autoload :ConfigMap,  'kubec/kubernetes/config_map'
+    autoload :CronJob,    'kubec/kubernetes/cron_job'
+    autoload :Template,   'kubec/kubernetes/template'
+    autoload :Service,    'kubec/kubernetes/service'
+    autoload :Deployment, 'kubec/kubernetes/deployment'
+    autoload :Metadata,   'kubec/kubernetes/metadata'
+    autoload :Spec,       'kubec/kubernetes/spec'
+    autoload :Container,  'kubec/kubernetes/container'
+    autoload :Volume,     'kubec/kubernetes/volume'
 
     autoload :HasAttribute, 'kubec/kubernetes/has_attribute'
 
     include Singleton
 
-    APPLYABLE_TYPES = %i[service deployment config].freeze
+    APPLYABLE_TYPES = %i[service deployment config cronjob].freeze
 
     class << self
       def apply(type)
@@ -59,6 +58,7 @@ module Kubec
       @services = []
       @deployments = []
       @configs = []
+      @cronjobs = []
     end
 
     def service(name = nil, &block)
@@ -74,6 +74,11 @@ module Kubec
     def config(name = nil, &block)
       return @configs if name.nil?
       @configs << Kubernetes::ConfigMap.new(name, &block)
+    end
+
+    def cronjob(name = nil, &block)
+      return @cronjobs if name.nil?
+      @cronjobs << Kubernetes::CronJob.new(name, &block)
     end
   end
 end

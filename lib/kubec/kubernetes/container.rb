@@ -41,8 +41,13 @@ module Kubec
       end
 
       def command(*args)
-        self[:command] = [args.flatten.first]
-        self[:args] = args.flatten.drop(1)
+        args = args.flatten
+        self[:command] = args.take(1)
+        self[:args] = args.drop(1)
+      end
+
+      def args(*args)
+        self[:args] = args.flatten
       end
     end
   end

@@ -15,11 +15,18 @@ namespace :deploy do
     Kubec::Utils::Helper.header 'Starting apply services'
     Kubec::Kubernetes.apply(:service)
   end
+
+  desc 'Apply Service to Kubernetes'
+  task :cronjobs do
+    Kubec::Utils::Helper.header 'Starting apply cron jobs'
+    Kubec::Kubernetes.apply(:cronjob)
+  end
 end
 
 desc 'Deploy to Kubernetes'
 task deploy: [
   'deploy:namespace',
   'deploy:deployments',
-  'deploy:services'
+  'deploy:services',
+  'deploy:cronjobs'
 ]

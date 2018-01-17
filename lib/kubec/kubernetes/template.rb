@@ -29,6 +29,10 @@ module Kubec
         spec[:containers] ||= []
         spec[:containers].push Container.new(name, &block)
       end
+
+      def restart(policy)
+        spec[:restartPolicy] = policy.to_s.capitalize
+      end
     end
   end
 end
