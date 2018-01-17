@@ -4,7 +4,8 @@ module Kubec
     class Deployment < Config
       api_version 'extensions/v1beta1'
 
-      def replicas(size)
+      def replicas(size = nil)
+        return spec[:replicas] || 1 if size.nil?
         spec[:replicas] = size.to_i
       end
 
