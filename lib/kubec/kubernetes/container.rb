@@ -12,6 +12,12 @@ module Kubec
         instance_eval(&block)
       end
 
+      def env(key, value)
+        self[:env] ||= []
+        self[:env].push name: key,
+                        value: value.to_s
+      end
+
       def mount(name, at:)
         self[:volumeMounts] ||= []
         self[:volumeMounts].push name: name,
