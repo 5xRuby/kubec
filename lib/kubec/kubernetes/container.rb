@@ -47,7 +47,7 @@ module Kubec
           hostIP: ip,
           name: name,
           protocol: protocol
-        }.compact
+        }
         self[:ports].push port
       end
 
