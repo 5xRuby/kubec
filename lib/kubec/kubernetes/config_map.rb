@@ -12,6 +12,11 @@ module Kubec
         instance_eval(&block)
       end
 
+      # TODO: Refactor this feature
+      def fetch(*args)
+        Environment.instance.fetch(*args)
+      end
+
       def set(key, value)
         self[:data][key] = value
       end

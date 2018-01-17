@@ -11,6 +11,11 @@ module Kubec
         self[:spec] = {}
       end
 
+      # TODO: Refactor this feature
+      def fetch(*args)
+        Environment.instance.fetch(*args)
+      end
+
       def volume(name, &block)
         spec[:volumes] ||= []
         spec[:volumes].push Volume.new(name, &block)

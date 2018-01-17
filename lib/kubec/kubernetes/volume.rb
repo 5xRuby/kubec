@@ -7,6 +7,11 @@ module Kubec
         instance_eval(&block)
       end
 
+      # TODO: Refactor this feature
+      def fetch(*args)
+        Environment.instance.fetch(*args)
+      end
+
       def empty(memory = false)
         self[:emptyDir] = if memory
                             { medium: true }

@@ -7,6 +7,11 @@ module Kubec
         self[:namespace] = fetch(:stage, :staging)
       end
 
+      # TODO: Refactor this feature
+      def fetch(*args)
+        Environment.instance.fetch(*args)
+      end
+
       def label(key, value)
         self['labels'] ||= {}
         self['labels'][key] = value

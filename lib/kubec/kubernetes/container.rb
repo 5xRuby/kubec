@@ -12,6 +12,11 @@ module Kubec
         instance_eval(&block)
       end
 
+      # TODO: Refactor this feature
+      def fetch(*args)
+        Environment.instance.fetch(*args)
+      end
+
       def env(key, value)
         self[:env] ||= []
         self[:env].push name: key,
