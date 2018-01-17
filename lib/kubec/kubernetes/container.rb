@@ -47,7 +47,7 @@ module Kubec
           hostIP: ip,
           name: name,
           protocol: protocol
-        }
+        }.reject { |_, v| v.nil? }
         self[:ports].push port
       end
 
