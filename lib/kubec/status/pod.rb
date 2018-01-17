@@ -41,7 +41,7 @@ module Kubec
         def setup_restarts
           self['Restarts'] = containers.map do |c|
             c['restartCount'].to_i
-          end.sum
+          end.reduce(0, &:+)
         end
 
         def setup_age
