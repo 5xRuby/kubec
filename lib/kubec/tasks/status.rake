@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :status do
   desc 'Show service status'
   task :service do

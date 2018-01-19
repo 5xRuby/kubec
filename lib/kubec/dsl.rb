@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kubec/dsl/stages'
 require 'kubec/dsl/paths'
 require 'kubec/dsl/env'

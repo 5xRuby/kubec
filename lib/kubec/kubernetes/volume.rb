@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kubec
   class Kubernetes
     # :nodoc:
@@ -38,6 +40,15 @@ module Kubec
         self[:configMap] = {
           name: name,
           items: items.map do |key, path|
+            { key: key, path: path }
+          end
+        }
+      end
+
+      def secret(name, items = nil)
+        self[:secret] = {
+          secretName: name,
+          items: items&.map do |key, path|
             { key: key, path: path }
           end
         }

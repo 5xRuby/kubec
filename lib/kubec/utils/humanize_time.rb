@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kubec
   module Utils
     # :nodoc:
@@ -31,7 +33,7 @@ module Kubec
 
         def convert(secs)
           PAIRS.dup.map do |count, name|
-            next unless secs > 0
+            next unless secs.positive?
             secs, n = secs.divmod(count)
             [n, name]
           end.compact.reverse

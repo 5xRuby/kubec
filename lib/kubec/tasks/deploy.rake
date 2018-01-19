@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :deploy do
   task :namespace do
     Kubec::Kubernetes.ensure_namespace

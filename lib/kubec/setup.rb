@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include Kubec::DSL
 
 stages.each do |stage|

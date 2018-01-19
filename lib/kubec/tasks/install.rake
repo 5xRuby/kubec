@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task :install do
   template_path = File.expand_path('../../templates', __FILE__)
 

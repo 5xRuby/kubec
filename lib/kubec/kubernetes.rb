@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kubec
   # Kubernetes
   class Kubernetes
