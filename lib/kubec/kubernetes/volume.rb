@@ -51,7 +51,7 @@ module Kubec
           items: items&.map do |key, path|
             { key: key, path: path }
           end
-        }
+        }.reject { |_, v| v.nil? }
       end
     end
   end
