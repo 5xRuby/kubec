@@ -68,7 +68,7 @@ module Kubec
     end
 
     def sort_options(options)
-      supported_options = %w[tasks]
+      supported_options = %w[tasks trace verbose]
 
       options.select! do |(switch, *)|
         switch =~ /--#{Regexp.union(supported_options)}/
