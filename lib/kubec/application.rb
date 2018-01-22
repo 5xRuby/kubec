@@ -74,12 +74,13 @@ module Kubec
         switch =~ /--#{Regexp.union(supported_options)}/
       end
 
-      super.push(debug, version)
+      super.push(debug, dry_run, version)
     end
 
     def setup_options
       options.rakelib = ['rakelib']
       options.debug = false
+      options.dry = false
       options.trace_output = STDERR
     end
 
@@ -93,6 +94,16 @@ module Kubec
         'Display debug information',
         lambda do |value|
           options.debug = value
+        end
+      ]
+    end
+
+    def dry_run
+      [
+        '--[no-]dry',
+        'Run kubernetes command in dry mode',
+        lambda do |value|
+          options.dry = value
         end
       ]
     end

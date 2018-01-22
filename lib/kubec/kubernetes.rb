@@ -26,7 +26,16 @@ module Kubec
         return unless APPLYABLE_TYPES.include?(type.to_sym)
         return debug(type) if Rake.application.options.debug
         # TODO: Replace with RESTful API
-        IO.popen('kubectl apply -f -', 'r+') do |io|
+        execute(type)
+      end
+
+      def cmd
+        return 'kubectl apply --dry-run -f -' if Rake.application.options.dry
+        'kubectl apply -f -'
+      end
+
+      def execute(type)
+        IO.popen(cmd, 'r+') do |io|
           io.write convert_to_json(instance.send(type))
           io.close_write
           puts io.gets
