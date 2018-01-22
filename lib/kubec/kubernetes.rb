@@ -38,7 +38,7 @@ module Kubec
         IO.popen(cmd, 'r+') do |io|
           io.write convert_to_json(instance.send(type))
           io.close_write
-          puts io.gets
+          puts io.gets until io.eof?
         end
       end
 
