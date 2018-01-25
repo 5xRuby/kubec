@@ -46,9 +46,9 @@ module Kubec
 
       def path_with_stage(path)
         path.split('.').tap do |ary|
-          ext = ary.pop
+          ext = ary.pop unless ary.first.empty?
           ary.push(fetch(:stage, :staging))
-          ary.push(ext)
+          ary.push(ext) if ext
         end.join('.')
       end
     end
