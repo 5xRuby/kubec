@@ -5,5 +5,6 @@ module Kubec
   module Utils
     autoload :HumanizeTime, 'kubec/utils/humanize_time'
     autoload :Helper,       'kubec/utils/helper'
+    autoload :Path,         'kubec/utils/path'
   end
 end

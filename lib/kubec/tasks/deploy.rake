@@ -28,6 +28,8 @@ end
 desc 'Deploy to Kubernetes'
 task deploy: [
   'deploy:namespace',
+  'secret:push',
+  'config:push',
   'deploy:deployments',
   'deploy:services',
   'deploy:cronjobs'

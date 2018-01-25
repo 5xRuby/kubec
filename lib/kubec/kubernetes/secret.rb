@@ -3,24 +3,14 @@
 module Kubec
   class Kubernetes
     # :nodoc:
-    class ConfigMap < Hash
-      attr_reader :name, :files
-
-      def initialize(name, &block)
-        @name = name.to_sym
-        @files = {}
-
-        prepare
-        instance_eval(&block)
-      end
-
+    class Secret < ConfigMap
       # TODO: Refactor this feature
       def fetch(*args)
         Environment.instance.fetch(*args)
       end
 
       def set(key, value)
-        self[:data][key] = value
+        self[:data][key] = Base64.encode64(value).delete("\n")
       end
 
       # TODO: Refactor
@@ -37,7 +27,8 @@ module Kubec
       def prepare
         self[:apiVersion] = 'v1'
         self[:metadata] = Metadata.new(@name)
-        self[:kind] = 'ConfigMap'
+        self[:type] = 'Opaque'
+        self[:kind] = 'Secret'
         self[:data] = {}
       end
 

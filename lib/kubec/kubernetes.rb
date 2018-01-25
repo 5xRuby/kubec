@@ -4,6 +4,7 @@ module Kubec
   # Kubernetes
   class Kubernetes
     autoload :Config,     'kubec/kubernetes/config'
+    autoload :Secret,     'kubec/kubernetes/secret'
     autoload :ConfigMap,  'kubec/kubernetes/config_map'
     autoload :CronJob,    'kubec/kubernetes/cron_job'
     autoload :Template,   'kubec/kubernetes/template'
@@ -18,7 +19,7 @@ module Kubec
 
     include Singleton
 
-    APPLYABLE_TYPES = %i[service deployment config cronjob].freeze
+    APPLYABLE_TYPES = %i[service deployment config secret cronjob].freeze
 
     class << self
       def apply(type)
@@ -69,6 +70,7 @@ module Kubec
       @services = []
       @deployments = []
       @configs = []
+      @secrets = []
       @cronjobs = []
     end
 
@@ -85,6 +87,11 @@ module Kubec
     def config(name = nil, &block)
       return @configs if name.nil?
       @configs << Kubernetes::ConfigMap.new(name, &block)
+    end
+
+    def secret(name = nil, &block)
+      return @secrets if name.nil?
+      @secrets << Kubernetes::Secret.new(name, &block)
     end
 
     def cronjob(name = nil, &block)

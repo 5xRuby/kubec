@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Kubec
-  module Config
+  module Secret
     # :nodoc:
     class Downloader
       def initialize
-        @result = `kubectl -n #{fetch(:stage, :staging)} get configmap -o json`
+        @result = `kubectl -n #{fetch(:stage, :staging)} get secret -o json`
         @success = $CHILD_STATUS.success?
         @items = {}
 
@@ -13,10 +13,10 @@ module Kubec
       end
 
       def save
-        Kubernetes.config.each do |config|
-          downloaded = @items[config.name]
-          config.files.each do |(key, path)|
-            write path, downloaded.dig('data', key)
+        Kubernetes.secret.each do |secret|
+          downloaded = @items[secret.name]
+          secret.files.each do |(key, path)|
+            write path, Base64.decode64(downloaded.dig('data', key))
           end
         end
       end

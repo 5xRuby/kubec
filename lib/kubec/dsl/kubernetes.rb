@@ -6,7 +6,8 @@ module Kubec
     module Kubernetes
       extend Forwardable
 
-      def_delegators :kubernetes, :service, :deployment, :config, :cronjob
+      def_delegators :kubernetes, :service, :deployment,
+                     :config, :secret, :cronjob
 
       def kubernetes
         Kubec::Kubernetes.instance

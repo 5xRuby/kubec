@@ -7,6 +7,7 @@ require 'pathname'
 require 'singleton'
 require 'hirb'
 require 'colorize'
+require 'base64'
 require 'English'
 
 require 'kubec/version'
@@ -19,5 +20,7 @@ module Kubec
   autoload :DSL,         'kubec/dsl'
   autoload :Status,      'kubec/status/base'
   autoload :Utils,       'kubec/utils'
+  # TODO: Replace with Downloader
   autoload :Config,      'kubec/config/base'
+  autoload :Secret,      'kubec/secret/base'
 end
