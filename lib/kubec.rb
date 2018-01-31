@@ -2,6 +2,7 @@
 
 require 'rake'
 require 'json'
+require 'yaml'
 require 'forwardable'
 require 'pathname'
 require 'singleton'
