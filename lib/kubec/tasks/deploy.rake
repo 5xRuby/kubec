@@ -28,8 +28,6 @@ namespace :deploy do
   desc 'Dump as config files'
   task :dump do
     puts [
-      Kubec::Kubernetes.convert_to_json(secret),
-      Kubec::Kubernetes.convert_to_json(config),
       Kubec::Kubernetes.convert_to_json(deployment),
       Kubec::Kubernetes.convert_to_json(service),
       Kubec::Kubernetes.convert_to_json(cronjob)
